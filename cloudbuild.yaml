@@ -1,0 +1,4 @@
+steps:
+  - name: 'gcr.io/cloud-builders/javac:8'
+    entrypoint: './gradlew'
+    args: ['--console=plain', '--no-daemon', ':server:jib', '-Djib.to.image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
