@@ -15,7 +15,7 @@ variable "zone" {
 
 variable "platform-main-branch" {
   type = string
-  default = "main"
+  default = "master"
 }
 
 variable "platform-repo" {
