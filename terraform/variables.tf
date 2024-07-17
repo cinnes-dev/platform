@@ -12,3 +12,23 @@ variable "zone" {
   type = string
   default = "europe-west2-a"
 }
+
+variable "platform-main-branch" {
+  type = string
+  default = "main"
+}
+
+variable "platform-repo" {
+  type = string
+  default = "cinnes-dev/platform"
+}
+
+variable "github-owner" {
+  type = string
+  default = "cinnes-dev"
+}
+
+variable "platform-repo-name" {
+  type = string
+  default = "platform"
+}
