@@ -14,4 +14,6 @@ resource "google_cloudbuild_trigger" "service-account-trigger" {
     google_project_iam_member.act_as,
     google_project_iam_member.logs_writer
   ]
+
+  include_build_logs = "INCLUDE_BUILD_LOGS_WITH_STATUS"
 }
