@@ -4,7 +4,7 @@ resource "google_cloudbuild_trigger" "service-account-trigger" {
     owner = var.github-owner
     name = var.platform-repo-name
     push {
-      branch = "^${var.platform-main-branch}$"
+      branch = var.platform-main-branch
     }
   }
 
