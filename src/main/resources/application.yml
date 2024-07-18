@@ -1,2 +1,20 @@
-greeting:
-  message: "hello"
+quarkus:
+  http:
+    auth:
+      basic: true
+      policy:
+        roles-allowed: admin
+      permission:
+        admin-permission:
+          paths: /admin*
+          policy: admin-policy
+
+  security:
+    users:
+      embedded:
+        enabled: true
+        plain-text: true
+        users:
+          admin: password
+        roles:
+          admin: admin
