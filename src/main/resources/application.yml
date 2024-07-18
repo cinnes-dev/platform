@@ -2,8 +2,3 @@ quarkus:
   google:
     cloud:
       project-id: cinnes-dev
-
-
-top:
-  secret:
-    password: banana
