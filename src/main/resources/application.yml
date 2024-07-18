@@ -1,20 +1,9 @@
 quarkus:
-  http:
-    auth:
-      basic: true
-      policy:
-        roles-allowed: admin
-      permission:
-        admin-permission:
-          paths: /admin*
-          policy: admin-policy
+  google:
+    cloud:
+      project-id: cinnes-dev
 
-  security:
-    users:
-      embedded:
-        enabled: true
-        plain-text: true
-        users:
-          admin: password
-        roles:
-          admin: admin
+
+top:
+  secret:
+    password: banana
