@@ -14,3 +14,10 @@ resource "google_project_iam_member" "logs_writer" {
   role    = "roles/logging.logWriter"
   member  = "serviceAccount:${google_service_account.cloudbuild_service_account.email}"
 }
+
+resource "google_project_iam_member" "storage_admin" {
+  project = var.project
+  # limit access more?
+  role    = "roles/storage.admin"
+  member  = "serviceAccount:${google_service_account.cloudbuild_service_account.email}"
+}
