@@ -25,10 +25,7 @@ steps:
       '--image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA',
       '--platform=managed',
       '--project=$PROJECT_ID',
-      '--service-account=cloud-sa@cinnes-dev.iam.gserviceaccount.com',
-      '--region=us-central1',
       '--allow-unauthenticated',
-      '--memory=512Mi',
       '$REPO_NAME'
     ]
 
