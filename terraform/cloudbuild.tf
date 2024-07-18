@@ -1,5 +1,5 @@
 resource "google_cloudbuild_trigger" "service-account-trigger" {
-  name = "platform-trigger"
+  name = "platform-deploy-trigger"
   github {
     owner = var.github-owner
     name = var.platform-repo-name
