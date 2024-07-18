@@ -4,3 +4,8 @@ resource "google_storage_bucket" "cloudbuild-logs" {
   force_destroy = true
   public_access_prevention = "enforced"
 }
+
+resource "google_container_registry" "registry" {
+  project = var.project
+  location = var.location
+}

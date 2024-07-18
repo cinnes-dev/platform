@@ -21,6 +21,7 @@ class GCPSecretManager {
     public fun getSecret(secretName: String): String {
         val secretVersionName: SecretVersionName = SecretVersionName.of(projectId, secretName, "latest")
         val response: AccessSecretVersionResponse = client.accessSecretVersion(secretVersionName)
+        println(response.payload.data.toStringUtf8())
         return response.payload.data.toStringUtf8()
     }
 }
