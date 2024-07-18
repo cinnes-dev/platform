@@ -21,3 +21,9 @@ resource "google_project_iam_member" "storage_admin" {
   role    = "roles/storage.admin"
   member  = "serviceAccount:${google_service_account.cloudbuild_service_account.email}"
 }
+
+resource "google_project_iam_member" "artifact_registry_admin" {
+  project = var.project
+  role    = "roles/artifactregistry.admin"
+  member  = "serviceAccount:${google_service_account.cloudbuild_service_account.email}"
+}
