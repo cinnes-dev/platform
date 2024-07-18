@@ -18,10 +18,9 @@ class GCPSecretManager {
     @field: ConfigProperty(name = "quarkus.google.cloud.project-id")
     lateinit var projectId: String
 
-    public fun getSecret(secretName: String): String {
+    fun getSecret(secretName: String): String {
         val secretVersionName: SecretVersionName = SecretVersionName.of(projectId, secretName, "latest")
         val response: AccessSecretVersionResponse = client.accessSecretVersion(secretVersionName)
-        println(response.payload.data.toStringUtf8())
         return response.payload.data.toStringUtf8()
     }
 }
