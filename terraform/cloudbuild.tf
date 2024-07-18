@@ -9,7 +9,7 @@ resource "google_cloudbuild_trigger" "service-account-trigger" {
   }
 
   service_account = google_service_account.cloudbuild_service_account.id
-  filename        = "cloudbuild.yaml"
+  filename        = "ci/deploy.yaml"
   depends_on = [
     google_project_iam_member.act_as,
     google_project_iam_member.logs_writer,
