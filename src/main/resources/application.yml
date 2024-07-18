@@ -1,10 +1,2 @@
 greeting:
   message: "hello"
-
-quarkus:
-  container-image:
-    build: true
-    push: true
-    group: cinnes-dev
-    name: platform
-    registry: gcr.io

@@ -1,9 +1,25 @@
 logsBucket: cinnes-dev-platform-cloudbuild-logs
 
 steps:
-  - name: 'eclipse-temurin'
-    entrypoint: './mvnw'
-    args: ['clean', 'package']
+  # Create docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA', '.']
 
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
+
+  # Start up a cloud instance
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['beta', 'run', 'deploy', '--image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA', '--platform=managed', '--project=$PROJECT_ID', '--region=us-central1', '--allow-unauthenticated', '--memory=512Mi', '$REPO_NAME']
+    args: [
+      'beta', 'run', 'deploy',
+      '--image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA',
+      '--platform=managed',
+      '--project=$PROJECT_ID',
+      '--region=us-central1',
+      '--allow-unauthenticated',
+      '--memory=512Mi',
+      '$REPO_NAME'
+    ]
+
+images: ['gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
