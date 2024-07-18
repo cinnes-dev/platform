@@ -34,3 +34,9 @@ resource "google_project_iam_member" "run_admin" {
   role    = "roles/run.admin"
   member  = "serviceAccount:${google_service_account.cloudbuild_service_account.email}"
 }
+
+resource "google_project_iam_member" "secret-viewer" {
+  project = var.project
+  role    = "roles/secretmanager.secretAccessor"
+  member  = "serviceAccount:${google_service_account.cloudbuild_service_account.email}"
+}
