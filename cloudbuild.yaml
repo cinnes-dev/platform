@@ -3,7 +3,7 @@ logsBucket: cinnes-dev-platform-cloudbuild-logs
 steps:
   - name: 'gcr.io/cloud-builders/javac:8'
     entrypoint: './mvnw'
-    args: ['--no-transfer-progress', 'compile', 'jib:build', '-Djib.to.image=gcr.io/$PROJECT_ID/hello-s1p:$COMMIT_SHA']
+    args: ['--no-transfer-progress', 'compile', 'jib:build', '-Djib.to.image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['beta', 'run', 'deploy', '--image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA', '--platform=managed', '--project=$PROJECT_ID', '--region=us-central1', '--allow-unauthenticated', '--memory=512Mi', '$REPO_NAME']
