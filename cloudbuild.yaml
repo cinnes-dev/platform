@@ -2,7 +2,7 @@ logsBucket: cinnes-dev-platform-cloudbuild-logs
 
 steps:
   - name: 'gcr.io/cloud-builders/javac:8'
-    entrypoint: './gradlew'
+    entrypoint: './mvnw'
     args: ['--console=plain', '--no-daemon', ':server:jib', '-Djib.to.image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
 
   - name: 'gcr.io/cloud-builders/gcloud'
