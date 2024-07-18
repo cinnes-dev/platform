@@ -1,6 +1,9 @@
 logsBucket: cinnes-dev-platform-cloudbuild-logs
 
 steps:
+  - name: maven:3-jdk-21
+    entrypoint: mvn
+    args: [ 'package' ]
   # Create docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: [
