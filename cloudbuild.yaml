@@ -3,7 +3,10 @@ logsBucket: cinnes-dev-platform-cloudbuild-logs
 steps:
   # Create docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA', '.']
+    args: [
+      'build',
+      '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA',
+      '-f', 'src/main/docker/Dockerfile.jvm']
 
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
