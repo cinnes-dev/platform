@@ -79,10 +79,6 @@
       <artifactId>quarkus-arc</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-keycloak-authorization</artifactId>
-    </dependency>
-    <dependency>
       <groupId>io.quarkiverse.googlecloudservices</groupId>
       <artifactId>quarkus-google-cloud-secret-manager</artifactId>
     </dependency>
