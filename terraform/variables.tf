@@ -8,6 +8,11 @@ variable "region" {
   default = "europe-west2"
 }
 
+variable "location" {
+  type = string
+  default = "europe-west2-a"
+}
+
 variable "region-us" {
   type = string
   default = "us-east1"
