@@ -1,6 +1,6 @@
 resource "google_cloud_run_v2_service" "platform" {
   name     = "platform"
-  location = var.region-us
+  location = var.region
   project  = var.project
 
   template {
