@@ -7,6 +7,14 @@ resource "google_artifact_registry_repository" "platform" {
   docker_config {
     immutable_tags = true
   }
+
+  cleanup_policies {
+    id = "keep-max"
+    action = "KEEP"
+    most_recent_versions {
+      keep_count = 3
+    }
+  }
 }
 
 data "google_artifact_registry_docker_image" "myimage" {
