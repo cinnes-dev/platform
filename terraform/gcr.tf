@@ -12,5 +12,5 @@ resource "google_artifact_registry_repository" "platform" {
 data "google_artifact_registry_docker_image" "myimage" {
   location      = google_artifact_registry_repository.platform.location
   repository_id = google_artifact_registry_repository.platform.repository_id
-  image_name = "platform:latest"
+  image_name = var.platform-repo-name
 }
