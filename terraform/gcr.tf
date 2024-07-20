@@ -1,5 +1,5 @@
 resource "google_artifact_registry_repository" "platform" {
-  location      = var.gcr-region-us
+  location      = var.gcr-location-us
   repository_id = "gcr.io"
   description   = "Contains deployment immages for cinnes-dev/platform"
   format        = "DOCKER"
@@ -17,7 +17,7 @@ resource "google_artifact_registry_repository" "platform" {
   }
 }
 
-data "google_artifact_registry_docker_image" "myimage" {
+data "google_artifact_registry_docker_image" "platform_image" {
   location      = google_artifact_registry_repository.platform.location
   repository_id = google_artifact_registry_repository.platform.repository_id
   image_name = var.platform-repo-name

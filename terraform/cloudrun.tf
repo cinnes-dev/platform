@@ -1,4 +1,4 @@
-resource "google_cloud_run_v2_service" "platform" {
+resource "google_cloud_run_v2_service" "platform_service" {
   name     = "platform"
   location = var.region-us
   project  = var.project
@@ -7,7 +7,7 @@ resource "google_cloud_run_v2_service" "platform" {
     service_account = google_service_account.cloudbuild_sa.email
 
     containers {
-      image = data.google_artifact_registry_docker_image.myimage.self_link
+      image = data.google_artifact_registry_docker_image.platform_image.self_link
 
       resources {
         limits = {
@@ -33,7 +33,7 @@ resource "google_cloud_run_domain_mapping" "default" {
   name     = var.domain-name
 
   spec {
-    route_name = google_cloud_run_v2_service.platform.name
+    route_name = google_cloud_run_v2_service.platform_service.name
   }
 
   metadata {

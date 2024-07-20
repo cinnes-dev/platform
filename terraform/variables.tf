@@ -13,7 +13,7 @@ variable "region-us" {
   default = "us-east1"
 }
 
-variable "gcr-region-us" {
+variable "gcr-location-us" {
   type = string
   default = "us"
 }
@@ -28,11 +28,6 @@ variable "platform-main-branch" {
   default = "master"
 }
 
-variable "platform-repo" {
-  type = string
-  default = "cinnes-dev/platform"
-}
-
 variable "github-owner" {
   type = string
   default = "cinnes-dev"
@@ -41,9 +36,4 @@ variable "github-owner" {
 variable "platform-repo-name" {
   type = string
   default = "platform"
-}
-
-variable "ssl" {
-  type = bool
-  default = false
 }
