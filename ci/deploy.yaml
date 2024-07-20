@@ -25,7 +25,6 @@ steps:
     args: [
       'beta', 'run', 'deploy',
       '--image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA',
-      '--platform=managed',
       '--project=$PROJECT_ID',
       '--region=us-east1',
       '$REPO_NAME'
