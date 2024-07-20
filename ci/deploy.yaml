@@ -3,12 +3,13 @@ logsBucket: cinnes-dev-platform-cloudbuild-logs
 images: ['gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
 
 steps:
-  - name: 'gcr.io/cloud-builders/mvn'
+  - id: 'build-project'
+    name: 'gcr.io/cloud-builders/mvn'
     entrypoint: mvn
     args: [ 'package',  '-Dmaven.test.skip=true' ]
 
-  # Create docker image
-  - name: 'gcr.io/cloud-builders/docker'
+  - id: 'create-docker-image'
+    name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
       '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA',
@@ -16,12 +17,12 @@ steps:
       '.'
     ]
 
-  # Push the container image to Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
+  - id: 'push-to-gcr'
+    name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
 
-  # Start up a cloud instance
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - id: 'deploy-to-cloud-run'
+    name: 'gcr.io/cloud-builders/gcloud'
     args: [
       'beta', 'run', 'deploy',
       '--image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA',
