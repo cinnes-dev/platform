@@ -1,8 +1,25 @@
 #file: noinspection YAMLSchemaValidation
 logsBucket: cinnes-dev-platform-cloudbuild-logs
-images: ['gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
+images: 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA'
 
 steps:
+
+  # Load the cached files from GCS if they exist.
+  - id: 'pull-down-cache'
+    name: gcr.io/cloud-builders/gsutil
+    dir: /root
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        (
+          gsutil cp gs://${PROJECT_ID}/${REPO_NAME}-m2-cache.tar.gz /tmp/m2-cache.tar.gz &&
+          tar -xzf /tmp/m2-cache.tar.gz
+        ) || echo 'Cache not found'
+    volumes:
+      - name: user.home
+        path: /root
+
   - id: 'build-project'
     name: 'gcr.io/cloud-builders/mvn'
     entrypoint: mvn
@@ -30,3 +47,22 @@ steps:
       '--region=us-east1',
       '$REPO_NAME'
     ]
+
+
+  # Saves the files to the GCS cache.
+  - id: 'push-up-cache'
+    waitFor:
+      - 'build-project'
+    name: gcr.io/cloud-builders/gsutil
+    dir: /root
+    entrypoint: bash
+    # Caches the local Maven repository.
+    args:
+      - -c
+      - |
+        set -ex
+        tar -czf /tmp/m2-cache.tar.gz .m2 &&
+        gsutil cp /tmp/m2-cache.tar.gz gs://${PROJECT_ID}/${REPO_NAME}-m2-cache.tar.gz
+    volumes:
+      - name: user.home
+        path: /root
