@@ -8,6 +8,11 @@ variable "region" {
   default = "europe-west2"
 }
 
+variable "region-us" {
+  type = string
+  default = "us-east1"
+}
+
 variable "gcr-region-us" {
   type = string
   default = "us"
@@ -16,6 +21,11 @@ variable "gcr-region-us" {
 variable "zone" {
   type = string
   default = "europe-west2-a"
+}
+
+variable "domain-name" {
+  type = string
+  default = "cinnes.dev"
 }
 
 variable "platform-main-branch" {

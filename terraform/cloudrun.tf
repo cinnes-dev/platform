@@ -1,6 +1,6 @@
 resource "google_cloud_run_v2_service" "platform" {
   name     = "platform"
-  location = "us-central1"
+  location = var.region-us
   project  = var.project
 
   template {
@@ -26,4 +26,17 @@ resource "google_cloud_run_v2_service" "platform" {
   depends_on = [
     google_artifact_registry_repository.platform
   ]
+}
+
+resource "google_cloud_run_domain_mapping" "default" {
+  location = var.region-us
+  name     = var.domain-name
+
+  spec {
+    route_name = google_cloud_run_v2_service.platform.name
+  }
+
+  metadata {
+    namespace = var.project
+  }
 }
