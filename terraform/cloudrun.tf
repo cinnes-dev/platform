@@ -4,7 +4,7 @@ resource "google_cloud_run_v2_service" "platform" {
   project  = var.project
 
   template {
-    service_account = google_service_account.cloudbuild_service_account.email
+    service_account = google_service_account.cloudbuild_sa.email
 
     containers {
       image = data.google_artifact_registry_docker_image.myimage.self_link

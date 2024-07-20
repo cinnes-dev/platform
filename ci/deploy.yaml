@@ -25,7 +25,7 @@ steps:
       '--image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA',
       '--platform=managed',
       '--project=$PROJECT_ID',
-      '--region=us-central1',
+      '--region=us-east1',
       '--allow-unauthenticated',
       '$REPO_NAME'
     ]

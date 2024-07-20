@@ -8,16 +8,31 @@ resource "google_cloudbuild_trigger" "service-account-trigger" {
     }
   }
 
-  service_account = google_service_account.cloudbuild_service_account.id
+  service_account = google_service_account.cloudbuild_sa.id
   filename        = "ci/deploy.yaml"
   depends_on = [
-    google_project_iam_member.cloudbuild_act_as,
-    google_project_iam_member.cloudbuild_logs_writer,
-    google_project_iam_member.cloudbuild_storage_admin,
-    google_project_iam_member.cloudbuild_artifact_registry_admin,
-    google_project_iam_member.cloudbuild_run_admin,
-    google_project_iam_member.cloudbuild_secret-viewer
+    google_project_iam_member.cloud_deployer
   ]
 
   include_build_logs = "INCLUDE_BUILD_LOGS_WITH_STATUS"
+}
+
+resource "google_service_account" "cloudbuild_sa" {
+  account_id = "cloud-sa"
+  display_name = "Cloudbuild SA"
+}
+
+resource "google_project_iam_member" "cloud_deployer" {
+  for_each = toset([
+    "roles/iam.serviceAccountUser",
+    "roles/logging.logWriter",
+    "roles/storage.admin",
+    "roles/artifactregistry.admin",
+    "roles/run.admin",
+    "roles/secretmanager.secretAccessor"
+  ])
+
+  project = var.project
+  role = each.key
+  member = "serviceAccount:${google_service_account.cloudbuild_sa.email}"
 }
