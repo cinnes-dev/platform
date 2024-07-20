@@ -1,6 +1,8 @@
 #file: noinspection YAMLSchemaValidation
 logsBucket: cinnes-dev-platform-cloudbuild-logs
 images: ['gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
+substitutions:
+  _GCS_CACHE_BUCKET: cinnes-dev-build-cache
 
 steps:
 
@@ -65,7 +67,7 @@ steps:
       - |
         set -ex
         tar -czf /tmp/m2-cache.tar.gz .m2 &&
-        gsutil cp /tmp/m2-cache.tar.gz gs://${PROJECT_ID}/${REPO_NAME}-m2-cache.tar.gz
+        gsutil cp /tmp/m2-cache.tar.gz gs://${_GCS_CACHE_BUCKET}/${REPO_NAME}-m2-cache.tar.gz
     volumes:
       - name: user.home
         path: /root
