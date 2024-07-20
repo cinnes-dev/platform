@@ -1,6 +1,6 @@
 #file: noinspection YAMLSchemaValidation
 logsBucket: cinnes-dev-platform-cloudbuild-logs
-images: 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA'
+images: ['gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
 
 steps:
 
