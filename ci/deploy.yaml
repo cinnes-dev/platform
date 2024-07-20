@@ -7,9 +7,9 @@ substitutions:
 steps:
 
   # Load the cached files from GCS if they exist.
-  - id: pull-down-cache
+  - id: 'pull-down-cache'
     waitFor:
-      - -
+      - '-'
     name: gcr.io/cloud-builders/gsutil
     dir: /root
     entrypoint: bash
@@ -24,9 +24,9 @@ steps:
       - name: user.home
         path: /root
 
-  - id: build-project
+  - id: 'build-project'
     waitFor:
-      - pull-down-cache
+      - 'pull-down-cache'
     name: gcr.io/cloud-builders/mvn
     entrypoint: mvn
     args: [ package,  -Dmaven.test.skip=true ]
@@ -34,9 +34,9 @@ steps:
       - name: user.home
         path: /root
 
-  - id: create-docker-image
+  - id: 'create-docker-image'
     waitFor:
-      - build-project
+      - 'build-project'
     name: gcr.io/cloud-builders/docker
     args: [
       build,
@@ -45,15 +45,15 @@ steps:
       .
     ]
 
-  - id: push-to-gcr
+  - id: 'push-to-gcr'
     waitFor:
-      - create-docker-image
+      - 'create-docker-image'
     name: gcr.io/cloud-builders/docker
     args: [push, gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA]
 
-  - id: deploy-to-cloud-run
+  - id: 'deploy-to-cloud-run'
     waitFor:
-      - push-to-gcr
+      - 'push-to-gcr'
     name: gcr.io/cloud-builders/gcloud
     args: [
       beta, run, deploy,
@@ -64,9 +64,9 @@ steps:
     ]
 
   # Saves the files to the GCS cache.
-  - id: push-up-cache
+  - id: 'push-up-cache'
     waitFor:
-      - build-project
+      - 'build-project'
     name: gcr.io/cloud-builders/gsutil
     dir: /root
     entrypoint: bash
