@@ -3,12 +3,7 @@ variable "project" {
   default = "cinnes-dev"
 }
 
-variable "location" {
-  type = string
-  default = "EU"
-}
-
-variable "secret-manager-location" {
+variable "region" {
   type = string
   default = "europe-west2"
 }
@@ -36,4 +31,9 @@ variable "github-owner" {
 variable "platform-repo-name" {
   type = string
   default = "platform"
+}
+
+variable "ssl" {
+  type = bool
+  default = false
 }

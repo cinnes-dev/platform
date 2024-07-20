@@ -5,7 +5,7 @@ resource "google_secret_manager_secret" "secret-basic" {
   replication {
     user_managed {
       replicas {
-        location = var.secret-manager-location
+        location = var.region
       }
     }
   }

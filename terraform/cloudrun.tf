@@ -4,8 +4,10 @@ resource "google_cloud_run_v2_service" "platform" {
   project  = var.project
 
   template {
+    service_account = google_service_account.cloudbuild_service_account.email
+
     containers {
-      image = "us-docker.pkg.dev/cloudrun/container/hello"
+      image = data.google_artifact_registry_docker_image.myimage.self_link
 
       resources {
         limits = {
@@ -14,6 +16,14 @@ resource "google_cloud_run_v2_service" "platform" {
         }
       }
     }
-    service_account = google_service_account.cloudbuild_service_account.email
+
+    annotations = {
+      # https://cloud.google.com/sdk/gcloud/reference/run/deploy#--ingress
+      "run.googleapis.com/ingress" = "all"
+    }
   }
+
+  depends_on = [
+    google_artifact_registry_repository.platform
+  ]
 }
