@@ -8,6 +8,11 @@ variable "region" {
   default = "europe-west2"
 }
 
+variable "gcr-region-us" {
+  type = string
+  default = "us"
+}
+
 variable "zone" {
   type = string
   default = "europe-west2-a"
