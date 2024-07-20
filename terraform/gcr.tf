@@ -9,6 +9,14 @@ resource "google_artifact_registry_repository" "platform" {
   }
 
   cleanup_policies {
+    id = "delete-older-than-1-hour"
+    action = "DELETE"
+    condition {
+      older_than = "3600s"
+    }
+  }
+
+  cleanup_policies {
     id = "keep-max"
     action = "KEEP"
     most_recent_versions {

@@ -16,11 +16,6 @@ resource "google_cloud_run_v2_service" "platform_service" {
         }
       }
     }
-
-    annotations = {
-      # https://cloud.google.com/sdk/gcloud/reference/run/deploy#--ingress
-      "run.googleapis.com/ingress" = "all"
-    }
   }
 
   depends_on = [
