@@ -1,6 +1,6 @@
 #file: noinspection YAMLSchemaValidation
 logsBucket: cinnes-dev-platform-cloudbuild-logs
-images: [gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA]
+images: [ gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA ]
 substitutions:
   _GCS_CACHE_BUCKET: cinnes-dev-build-cache
 
@@ -52,7 +52,6 @@ steps:
       --region=us-east1,
       $REPO_NAME
     ]
-
 
   # Saves the files to the GCS cache.
   - id: 'push-up-cache'
