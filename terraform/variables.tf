@@ -18,11 +18,6 @@ variable "gcr-region-us" {
   default = "us"
 }
 
-variable "zone" {
-  type = string
-  default = "europe-west2-a"
-}
-
 variable "domain-name" {
   type = string
   default = "cinnes.dev"
