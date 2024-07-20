@@ -1,4 +1,6 @@
+#file: noinspection YAMLSchemaValidation
 logsBucket: cinnes-dev-platform-cloudbuild-logs
+images: ['gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
 
 steps:
   - name: 'gcr.io/cloud-builders/mvn'
@@ -29,5 +31,3 @@ steps:
       '--allow-unauthenticated',
       '$REPO_NAME'
     ]
-
-images: ['gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
