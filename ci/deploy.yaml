@@ -28,6 +28,5 @@ steps:
       '--platform=managed',
       '--project=$PROJECT_ID',
       '--region=us-east1',
-      '--allow-unauthenticated',
       '$REPO_NAME'
     ]
