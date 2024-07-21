@@ -29,7 +29,8 @@ resource "google_project_iam_member" "cloud_deployer" {
     "roles/storage.admin",
     "roles/artifactregistry.admin",
     "roles/run.admin",
-    "roles/secretmanager.secretAccessor"
+    "roles/secretmanager.secretAccessor",
+    "roles/cloudsql.client"
   ])
 
   project = var.project

@@ -25,7 +25,7 @@ resource "google_cloud_run_v2_service" "platform_service" {
 
 resource "google_cloud_run_domain_mapping" "default" {
   location = var.region-us
-  name     = var.domain-name
+  name     = "api.${var.domain-name}"
 
   spec {
     route_name = google_cloud_run_v2_service.platform_service.name
