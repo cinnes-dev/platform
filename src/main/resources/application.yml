@@ -2,3 +2,11 @@ quarkus:
   google:
     cloud:
       project-id: cinnes-dev
+
+      firebase-admin:
+        auth:
+          enabled: true
+
+  security:
+    jaxrs:
+      deny-unannotated-endpoints: true
