@@ -42,3 +42,11 @@ variable "platform-repo-name" {
   type = string
   default = "platform"
 }
+
+variable "idp_client_id" {
+  # env var populated
+}
+
+variable "idp_client_secret" {
+  # env var populated
+}

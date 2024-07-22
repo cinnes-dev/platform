@@ -50,7 +50,6 @@ resource "google_identity_platform_default_supported_idp_config" "idp_config" {
   enabled       = true
   idp_id        = "google.com"
 
-  # TODO: tfvars this
-  client_id     = "bogus"
-  client_secret = "bogus"
+  client_id     = var.idp_client_id
+  client_secret = var.idp_client_secret
 }
