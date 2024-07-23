@@ -1,5 +1,5 @@
-resource "google_secret_manager_secret" "secret_top_secret" {
-  secret_id = "top-secret"
+resource "google_secret_manager_secret" "health-ingest-key" {
+  secret_id = "health-ingest-key"
   project = var.project
 
   replication {

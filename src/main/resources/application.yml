@@ -2,6 +2,10 @@ quarkus:
   http:
     auth:
       permission:
+        open:
+          paths: /health/ingest
+          policy: permit
+        # Prevent access for unauthenticated
         secured:
           paths: /*
           policy: authenticated
@@ -13,3 +17,8 @@ quarkus:
       firebase:
         auth:
           enabled: true
+
+'%dev':
+  health:
+    ingest:
+      key: test
