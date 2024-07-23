@@ -59,10 +59,10 @@ steps:
   - id: 'deploy-to-cloud-run'
     waitFor:
       - 'push-to-gcr'
-    name: gcr.io/cloudsdktool/cloud-sdk
+    name: gcr.io/cloud-builders/gcloud
     entrypoint: bash
     args: [
-      gcloud, beta, run, deploy,
+      beta, run, deploy,
       --image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA,
       --project=$PROJECT_ID,
       --region=us-east1,
