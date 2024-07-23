@@ -18,9 +18,11 @@ quarkus:
         auth:
           enabled: true
 
-  log.sentry: true
-  log.sentry.dsn: https://3e96aee38169343492bf1be4663b6cf3@o4507648641204224.ingest.de.sentry.io/4507648652804176
-  log.sentry.in-app-packages: dev.cinnes
+  log:
+    sentry:
+      ~: true
+      dsn: https://3e96aee38169343492bf1be4663b6cf3@o4507648641204224.ingest.de.sentry.io/4507648652804176
+      in-app-packages: dev.cinnes
 
 '%dev':
   health:
