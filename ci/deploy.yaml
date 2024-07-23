@@ -66,9 +66,9 @@ steps:
       - |
         gcloud beta run deploy $REPO_NAME \
           --image gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA \
-          --region us-east1
-          --project $PROJECT_ID
-          --set-end-vars HEALTH_INGEST_KEY=$$HEALTH_INGEST_KEY
+          --region us-east1 \
+          --project $PROJECT_ID \
+          --set-env-vars HEALTH_INGEST_KEY=$$HEALTH_INGEST_KEY
     secretEnv: [
       'HEALTH_INGEST_KEY'
     ]
