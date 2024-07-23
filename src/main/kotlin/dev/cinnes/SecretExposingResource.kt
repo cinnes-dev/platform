@@ -18,5 +18,5 @@ class SecretExposingResource {
     @GET
     @Path("/{secretName}")
     @Produces(MediaType.TEXT_PLAIN)
-    fun hello(@PathParam("secretName") secretName: String): String = secretManager.getSecret(secretName)
+    fun hello(@PathParam("secretName") secretName: String): String = throw NullPointerException("boom")
 }
