@@ -66,7 +66,7 @@ steps:
       --image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA,
       --project=$PROJECT_ID,
       --region=us-east1,
-      --set-env-vars HEALTH_INGEST_KEY=$$HEALTH_INGEST_KEY
+      --set-env-vars HEALTH_INGEST_KEY=$$HEALTH_INGEST_KEY,
       $REPO_NAME
     ]
 
