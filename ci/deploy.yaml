@@ -71,7 +71,7 @@ steps:
           --image gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA \
           --region us-east1 \
           --project $PROJECT_ID \
-          --set-env-vars HEALTH_INGEST_KEY=$$HEALTH_INGEST_KEY
+          --set-env-vars HEALTH_INGEST_KEY=$$HEALTH_INGEST_KEY \
           --set-env-vars SENTRY_AUTH_TOKEN=$$SENTRY_AUTH_TOKEN
     secretEnv: [
       'HEALTH_INGEST_KEY',
