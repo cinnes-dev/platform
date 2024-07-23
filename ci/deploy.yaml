@@ -62,7 +62,7 @@ steps:
     name: gcr.io/cloud-builders/gcloud
     entrypoint: bash
     args: [
-      beta, run, deploy,
+      gcloud, beta, run, deploy,
       --image=gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA,
       --project=$PROJECT_ID,
       --region=us-east1,
