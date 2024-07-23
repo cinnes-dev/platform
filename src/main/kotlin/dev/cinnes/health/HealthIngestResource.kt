@@ -13,6 +13,6 @@ class HealthIngestResource {
 
     @POST
     @Consumes(APPLICATION_JSON)
-    fun ingest(body: String): Unit = log.info("Received health data ingest")
+    fun ingest(body: String): Unit = log.info("Received health ingest")
 
 }

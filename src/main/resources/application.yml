@@ -1,12 +1,15 @@
 quarkus:
+  http:
+    auth:
+      permission:
+        secured:
+          paths: /*
+          policy: authenticated
+
   google:
     cloud:
       project-id: cinnes-dev
 
-      firebase-admin:
+      firebase:
         auth:
           enabled: true
-
-  security:
-    jaxrs:
-      deny-unannotated-endpoints: true
