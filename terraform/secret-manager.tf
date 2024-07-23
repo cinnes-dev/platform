@@ -10,3 +10,16 @@ resource "google_secret_manager_secret" "health-ingest-key" {
     }
   }
 }
+
+resource "google_secret_manager_secret" "sentry-auth-token" {
+  secret_id = "sentry-auth-token"
+  project = var.project
+
+  replication {
+    user_managed {
+      replicas {
+        location = var.region
+      }
+    }
+  }
+}
