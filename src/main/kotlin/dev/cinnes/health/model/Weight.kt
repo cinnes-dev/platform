@@ -1,5 +1,7 @@
 package dev.cinnes.health.model
 
+import com.influxdb.annotations.Measurement
+
 enum class WeightUnit {
     kg,
     lbs

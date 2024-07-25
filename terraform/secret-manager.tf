@@ -23,3 +23,16 @@ resource "google_secret_manager_secret" "sentry-auth-token" {
     }
   }
 }
+
+resource "google_secret_manager_secret" "influx-token" {
+  secret_id = "influx-token"
+  project = var.project
+
+  replication {
+    user_managed {
+      replicas {
+        location = var.region
+      }
+    }
+  }
+}
