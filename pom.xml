@@ -68,10 +68,6 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-kotlin-serialization</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
     </dependency>
     <dependency>
@@ -120,6 +116,10 @@
       <artifactId>kotlin-test</artifactId>
       <version>${kotlin.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-kotlin</artifactId>
     </dependency>
   </dependencies>
 
@@ -218,7 +218,6 @@
           <jvmTarget>1.8</jvmTarget>
           <compilerPlugins>
             <plugin>all-open</plugin>
-            <plugin>kotlinx-serialization</plugin>
           </compilerPlugins>
           <pluginOptions>
             <option>all-open:annotation=jakarta.ws.rs.Path</option>

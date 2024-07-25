@@ -1,11 +1,15 @@
 package dev.cinnes.health.model
 
-import java.time.Instant
-
 enum class WeightUnit {
     kg,
-    lb
+    lbs
 }
 
-data class WeightRecording(val date: Instant, val qty: Float)
-class Weight(val units: WeightUnit, val data: Set<WeightRecording>): AbstractData(DataType.weight_body_mass)
+data class Weight(
+    val units: WeightUnit,
+    val data: Set<MetricReading>
+): BaseMetric() {
+    companion object {
+        const val TYPE_IDENTIFIER: String = "weight_body_mass"
+    }
+}

@@ -1,9 +1,7 @@
 package dev.cinnes.health
 
-import com.google.cloud.storage.Storage
 import dev.cinnes.health.HealthIngest.API_KEY_HEADER
-import dev.cinnes.health.model.AbstractData
-import jakarta.inject.Inject
+import dev.cinnes.health.model.HealthData
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.HeaderParam
 import jakarta.ws.rs.POST
@@ -22,9 +20,6 @@ class HealthIngestResource {
     @ConfigProperty(name = "health.ingest.key")
     lateinit var apiKey: String
 
-    @Inject
-    lateinit var storage: Storage
-
     private val log: Logger = Logger.getLogger(this.javaClass.name);
 
     @POST
@@ -32,11 +27,11 @@ class HealthIngestResource {
     fun ingest(@HeaderParam(API_KEY_HEADER) key: String, request: HealthIngestRequest): Unit {
         if (apiKey != key) return
 
-        request.data.metrics.forEach(log::info)
-
+        log.info("data - " + request.data)
         log.info("Received health ingest")
     }
 
-    data class HealthIngestRequest(val data: HealthIngestData)
-    data class HealthIngestData(val metrics: Set<AbstractData>)
+    data class HealthIngestRequest(
+        val `data`: HealthData
+    )
 }
