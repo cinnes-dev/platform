@@ -16,24 +16,36 @@ class InfluxService {
     @Inject
     lateinit var influxConfig: InfluxConfig
 
-    fun push(metric: BaseMetric) = runBlocking {
+    fun push(metrics: Set<BaseMetric>) = runBlocking {
         client().use { client ->
-            val points = metric.data.map { measurement ->
+            metrics.forEach { metric ->
+                pushMetric(client, metric)
+            }
+        }
+    }
 
-                val actualValue = when (metric) {
-                    // convert to lbs
-                    // TODO: do this in a cleaner way...
-                    is Weight -> measurement.qty * 2.20462
-                    else -> measurement.qty
-                }
+    fun push(metric: BaseMetric) = runBlocking {
+        client().use {
+            client -> pushMetric(client, metric)
+        }
+    }
 
-                Point.measurement(metric.typeIdentifier())
-                    .addField("value", actualValue)
-                    .time(measurement.date, WritePrecision.NS)
+    private suspend fun pushMetric(client: InfluxDBClientKotlin, metric: BaseMetric) {
+        val points = metric.data.map { measurement ->
+
+            val actualValue = when (metric) {
+                // convert to lbs
+                // TODO: do this in a cleaner way...
+                is Weight -> measurement.qty * 2.20462
+                else -> measurement.qty
             }
 
-            client.getWriteKotlinApi().writePoints(points)
+            Point.measurement(metric.typeIdentifier())
+                .addField("value", actualValue)
+                .time(measurement.date, WritePrecision.NS)
         }
+
+        client.getWriteKotlinApi().writePoints(points)
     }
 
     private fun client(): InfluxDBClientKotlin = InfluxDBClientKotlinFactory.create(influxConfig.clientOptions())

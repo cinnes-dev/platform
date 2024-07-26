@@ -35,7 +35,7 @@ class HealthIngestResource {
         if (apiKey != key) return
         log.info("Received health ingest")
 
-        request.data.metrics.forEach(influxService::push)
+        influxService.push(request.data.metrics)
     }
 
     data class HealthIngestRequest(
