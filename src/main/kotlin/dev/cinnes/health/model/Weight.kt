@@ -13,5 +13,5 @@ data class Weight(
         const val TYPE_IDENTIFIER: String = "weight_body_mass"
     }
 
-    override fun typeIdentifier(): String = BodyMassIndex.TYPE_IDENTIFIER
+    override fun typeIdentifier(): String = TYPE_IDENTIFIER
 }
