@@ -1,7 +1,5 @@
 package dev.cinnes.health.model
 
-import com.influxdb.annotations.Measurement
-
 enum class WeightUnit {
     kg,
     lbs
@@ -9,9 +7,11 @@ enum class WeightUnit {
 
 data class Weight(
     val units: WeightUnit,
-    val data: Set<MetricReading>
-): BaseMetric() {
+    override val data: Set<MetricReading>
+): BaseMetric(data) {
     companion object {
         const val TYPE_IDENTIFIER: String = "weight_body_mass"
     }
+
+    override fun typeIdentifier(): String = BodyMassIndex.TYPE_IDENTIFIER
 }

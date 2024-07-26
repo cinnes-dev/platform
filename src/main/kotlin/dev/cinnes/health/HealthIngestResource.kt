@@ -2,6 +2,7 @@ package dev.cinnes.health
 
 import dev.cinnes.influx.InfluxService
 import dev.cinnes.health.HealthIngest.API_KEY_HEADER
+import dev.cinnes.health.model.BaseMetric
 import dev.cinnes.health.model.HealthData
 import dev.cinnes.health.model.Weight
 import jakarta.inject.Inject
@@ -32,14 +33,9 @@ class HealthIngestResource {
     @Consumes(APPLICATION_JSON)
     fun ingest(@HeaderParam(API_KEY_HEADER) key: String, request: HealthIngestRequest): Unit {
         if (apiKey != key) return
-        log.info("data - " + request.data)
         log.info("Received health ingest")
 
-        request.data.metrics.forEach { metric ->
-            when (metric) {
-                is Weight -> influxService.push(metric)
-            }
-        }
+        request.data.metrics.forEach(influxService::push)
     }
 
     data class HealthIngestRequest(

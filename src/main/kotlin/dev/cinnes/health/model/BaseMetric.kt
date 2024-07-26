@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
     defaultImpl = Void::class
 )
 @JsonSubTypes(
-    JsonSubTypes.Type(name = Weight.TYPE_IDENTIFIER, value = Weight::class)
+    JsonSubTypes.Type(name = Weight.TYPE_IDENTIFIER, value = Weight::class),
+    JsonSubTypes.Type(name = BodyMassIndex.TYPE_IDENTIFIER, value = BodyMassIndex::class)
 )
-abstract class BaseMetric
+abstract class BaseMetric(open val data: Set<MetricReading>) {
+    abstract fun typeIdentifier(): String
+}
