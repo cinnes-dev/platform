@@ -5,6 +5,7 @@ import com.influxdb.client.kotlin.InfluxDBClientKotlin
 import com.influxdb.client.kotlin.InfluxDBClientKotlinFactory
 import com.influxdb.client.write.Point
 import dev.cinnes.health.model.BaseMetric
+import dev.cinnes.health.model.UnitBasedMetric
 import dev.cinnes.health.model.physical.Weight
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
@@ -32,17 +33,16 @@ class InfluxService {
 
     private suspend fun pushMetric(client: InfluxDBClientKotlin, metric: BaseMetric) {
         val points = metric.data.map { measurement ->
+            val point = Point.measurement(metric.typeIdentifier())
+                .addField("value", measurement.qty)
+                .time(measurement.date, WritePrecision.NS)
 
-            val actualValue = when (metric) {
-                // convert to lbs
-                // TODO: do this in a cleaner way...
-                is Weight -> measurement.qty * 2.20462
-                else -> measurement.qty
+            when (metric) {
+                is UnitBasedMetric<*> ->
+                    point.addTag("unit", metric.units.toString())
             }
 
-            Point.measurement(metric.typeIdentifier())
-                .addField("value", actualValue)
-                .time(measurement.date, WritePrecision.NS)
+            point
         }
 
         client.getWriteKotlinApi().writePoints(points)

@@ -1,13 +1,13 @@
 package dev.cinnes.health.model.nutrition
 
-import dev.cinnes.health.model.BaseMetric
 import dev.cinnes.health.model.MetricReading
+import dev.cinnes.health.model.UnitBasedMetric
 import dev.cinnes.health.model.units.WeightUnit
 
 data class Calcium(
-    val units: WeightUnit,
+    override val units: WeightUnit,
     override val data: Set<MetricReading>
-): BaseMetric(data) {
+): UnitBasedMetric<WeightUnit>(units, data) {
     companion object {
         const val TYPE_IDENTIFIER: String = "calcium"
     }

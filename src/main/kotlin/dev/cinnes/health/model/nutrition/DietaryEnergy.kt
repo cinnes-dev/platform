@@ -1,13 +1,13 @@
 package dev.cinnes.health.model.nutrition
 
-import dev.cinnes.health.model.BaseMetric
 import dev.cinnes.health.model.units.EnergyUnit
 import dev.cinnes.health.model.MetricReading
+import dev.cinnes.health.model.UnitBasedMetric
 
 data class DietaryEnergy(
-    val units: EnergyUnit,
+    override val units: EnergyUnit,
     override val data: Set<MetricReading>
-): BaseMetric(data) {
+): UnitBasedMetric<EnergyUnit>(units, data) {
     companion object {
         const val TYPE_IDENTIFIER: String = "dietary_energy"
     }
