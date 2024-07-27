@@ -6,7 +6,6 @@ import com.influxdb.client.kotlin.InfluxDBClientKotlinFactory
 import com.influxdb.client.write.Point
 import dev.cinnes.health.model.BaseMetric
 import dev.cinnes.health.model.UnitBasedMetric
-import dev.cinnes.health.model.physical.Weight
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import kotlinx.coroutines.runBlocking
@@ -39,7 +38,7 @@ class InfluxService {
 
             when (metric) {
                 is UnitBasedMetric<*> ->
-                    point.addTag("unit", metric.units.toString())
+                    point.addTag("unit", metric.units.name)
             }
 
             point
