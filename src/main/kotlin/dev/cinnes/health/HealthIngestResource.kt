@@ -29,9 +29,11 @@ class HealthIngestResource {
 
     @POST
     @Consumes(APPLICATION_JSON)
-    fun ingest(@HeaderParam(API_KEY_HEADER) key: String, request: HealthIngestRequest): Unit {
+    fun ingest(@HeaderParam(API_KEY_HEADER) key: String, request: HealthIngestRequest) {
         if (apiKey != key) return
-        log.info("Received health ingest")
+
+        val receivedMetricTypes = request.data.metrics.map { metric -> metric.javaClass.simpleName }
+        log.info("Received health ingest with metrics: $receivedMetricTypes")
 
         influxService.push(request.data.metrics)
     }
