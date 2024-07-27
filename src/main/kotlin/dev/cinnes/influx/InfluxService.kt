@@ -5,7 +5,7 @@ import com.influxdb.client.kotlin.InfluxDBClientKotlin
 import com.influxdb.client.kotlin.InfluxDBClientKotlinFactory
 import com.influxdb.client.write.Point
 import dev.cinnes.health.model.BaseMetric
-import dev.cinnes.health.model.Weight
+import dev.cinnes.health.model.physical.Weight
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
 import kotlinx.coroutines.runBlocking
