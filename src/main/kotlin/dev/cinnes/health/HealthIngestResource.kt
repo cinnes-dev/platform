@@ -2,9 +2,7 @@ package dev.cinnes.health
 
 import dev.cinnes.influx.InfluxService
 import dev.cinnes.health.HealthIngest.API_KEY_HEADER
-import dev.cinnes.health.model.BaseMetric
-import dev.cinnes.health.model.HealthData
-import dev.cinnes.health.model.Weight
+import dev.cinnes.health.model.request.HealthIngestRequest
 import jakarta.inject.Inject
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.HeaderParam
@@ -37,8 +35,4 @@ class HealthIngestResource {
 
         influxService.push(request.data.metrics)
     }
-
-    data class HealthIngestRequest(
-        val `data`: HealthData
-    )
 }

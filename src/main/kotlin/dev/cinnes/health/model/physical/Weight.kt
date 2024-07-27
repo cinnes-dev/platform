@@ -1,9 +1,8 @@
-package dev.cinnes.health.model
+package dev.cinnes.health.model.physical
 
-enum class WeightUnit {
-    kg,
-    lbs
-}
+import dev.cinnes.health.model.BaseMetric
+import dev.cinnes.health.model.MetricReading
+import dev.cinnes.health.model.units.WeightUnit
 
 data class Weight(
     val units: WeightUnit,

@@ -1,4 +1,7 @@
-package dev.cinnes.health.model
+package dev.cinnes.health.model.physical
+
+import dev.cinnes.health.model.BaseMetric
+import dev.cinnes.health.model.MetricReading
 
 data class BodyMassIndex(
     override val data: Set<MetricReading>
