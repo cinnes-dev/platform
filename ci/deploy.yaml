@@ -22,8 +22,7 @@ steps:
     entrypoint: sh
     args:
       - -c
-      - cd ./terraform
-      - terraform apply --auto-approve
+      - terraform apply --auto-approve ./terraform
 
   # Load the cached files from GCS if they exist.
   - id: 'pull-down-cache'
