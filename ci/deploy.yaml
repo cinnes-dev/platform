@@ -15,6 +15,15 @@ availableSecrets:
 
 steps:
 
+  - id: 'tf apply'
+    waitFor:
+      - '-'
+    name: hashicorp/terraform:1.0.0
+    entrypoint: sh
+    args:
+      - -c
+      - terraform apply ./terraform --auto-approve
+
   # Load the cached files from GCS if they exist.
   - id: 'pull-down-cache'
     waitFor:
@@ -63,6 +72,7 @@ steps:
   - id: 'deploy-to-cloud-run'
     waitFor:
       - 'push-to-gcr'
+      - 'tf-apply'
     name: gcr.io/cloud-builders/gcloud
     entrypoint: bash
     args:
