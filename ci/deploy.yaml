@@ -15,7 +15,7 @@ availableSecrets:
 
 steps:
 
-  - id: 'tf apply'
+  - id: 'tf-apply'
     waitFor:
       - '-'
     name: hashicorp/terraform:1.0.0
